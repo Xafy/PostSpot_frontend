@@ -17,7 +17,7 @@ const UsersPlaces = () =>{
             try{
                 const responseData = await sendRequest(`http://localhost:5000/api/places/user/${userId}`);
                 setLoadedPlaces(responseData.places)
-            } catch{}
+            } catch{setLoadedPlaces([])}
         }
         fetchUsers()
     },[sendRequest, userId])
@@ -30,7 +30,7 @@ const UsersPlaces = () =>{
     return(
         <React.Fragment>
             <ErrorModal error={error} onClear={clearError}/>
-            {isLoading && <LoadingSpinner Overly/>}
+            {isLoading && <LoadingSpinner/>}
             {!isLoading && loadedPlaces && <PlaceList items={loadedPlaces} onDeletePlace={onDeleteHandler}/>}
         </React.Fragment>
     )

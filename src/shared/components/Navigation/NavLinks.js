@@ -6,13 +6,14 @@ import './NavLinks.css';
 
 const NavLinks = props => {
     const auth = useContext(AuthContext)
+    const userId = auth.userId
     return(
         <ul className="nav-links">
             <li>
                 <NavLink to='/' >Spots users</NavLink>
             </li>
             {auth.isLoggedIn && <li>
-                <NavLink to='/u1/places'>My spots</NavLink>
+                <NavLink to={`/${userId}/places`}>My spots</NavLink>
             </li>}
             {auth.isLoggedIn && <li>
                 <NavLink to='/places/new'>Add spots</NavLink>
