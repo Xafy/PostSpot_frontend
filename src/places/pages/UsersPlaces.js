@@ -29,7 +29,6 @@ const UsersPlaces = () =>{
 
     return(
         <React.Fragment>
-            <ErrorModal error={error} onClear={clearError}/>
             {isLoading && <LoadingSpinner/>}
             {!isLoading && loadedPlaces && <PlaceList items={loadedPlaces} onDeletePlace={onDeleteHandler}/>}
         </React.Fragment>

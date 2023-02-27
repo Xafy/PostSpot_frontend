@@ -10,6 +10,7 @@ import ErrorModal from "../../shared/components/UIElements/ErrorModal";
 import LoadingSpinner from "../../shared/components/UIElements/LoadingSpinner";
 import { AuthContext } from "../../shared/context/auth-context";
 import { useNavigate } from "react-router-dom";
+import ImageUpload from "../../shared/components/FormElements/ImageUpload";
 
 const NewPlace = () =>{
     const auth = useContext(AuthContext)
@@ -18,6 +19,10 @@ const NewPlace = () =>{
     const [formState, InputHandler] = useForm({
         title: {
             value: '',
+            isValid: false
+        },
+        image: {
+            value: null,
             isValid: false
         },
         description: {
@@ -36,15 +41,15 @@ const NewPlace = () =>{
     const newPlaceSubmitHandler = async event => {
         event.preventDefault();
         try { 
+            const formData = new FormData();
+            formData.append('title', formState.inputs.title.value)
+            formData.append('image', formState.inputs.image.value)
+            formData.append('description', formState.inputs.description.value)
+            formData.append('address', formState.inputs.address.value)
+            formData.append('creator', auth.userId)
             await sendRequest('http://localhost:5000/api/places',
             'POST',
-            JSON.stringify({
-                title: formState.inputs.title.value,
-                description: formState.inputs.description.value,
-                address: formState.inputs.address.value,
-                creator: auth.userId
-            }),
-            {'Content-Type': 'application/json'})
+            formData,)
             navigate('/')
         } catch{}
     }
@@ -79,6 +84,7 @@ const NewPlace = () =>{
                     errorText='Please enter a valid adress .'
                     onInput={InputHandler}>
                 </Input>
+                <ImageUpload center id="image" onInput={InputHandler} errorText="Please provide an image"/>
                 <Button type="submit" disabled={!formState.isValid}>POST SPOT</Button>
             </form>
         </React.Fragment>
