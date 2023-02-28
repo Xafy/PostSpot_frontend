@@ -67,8 +67,6 @@ const Auth = () => {
     const authSubmitHandler = async event => {
         event.preventDefault();
 
-        console.log(formState.inputs)
-
         if (isLoginMode) {
             await sendRequest(
                 'http://localhost:5000/api/users/login',
@@ -78,7 +76,7 @@ const Auth = () => {
                 password: formState.inputs.password.value
                 }),
                 {'Content-Type': 'application/json'})
-                .then((responseData)=>{auth.login(responseData.user.id)})
+                .then((responseData)=>{auth.login(responseData.userId, responseData.token)})
         } 
         else {
             const formData = new FormData()
@@ -90,7 +88,7 @@ const Auth = () => {
                 'http://localhost:5000/api/users/register',
                 'POST',
                 formData)
-                .then((responseData)=>{auth.login(responseData.user.id);})
+                .then((responseData)=>{auth.login(responseData.userId, responseData.token);})
             }
     }
 

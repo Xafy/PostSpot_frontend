@@ -73,7 +73,8 @@ const UpdatePlace = props => {
                 description :formState.inputs.description.value,
                 address: formState.inputs.address.value
             }),
-            {'Content-Type': 'application/json'})
+            {'Content-Type': 'application/json',
+            Authorization: 'Bearer ' + auth.token})
             navigate(`/${userId}/places/`)
         } catch {}
     }
