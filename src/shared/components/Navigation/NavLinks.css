@@ -21,10 +21,13 @@
   padding: 0.5rem;
 }
 
+
+
 .nav-links a:hover,
 .nav-links a:active,
 .nav-links a.active {
-  background: #f8df00;
+  background: #49a1e9;
+  border-radius: 5px;
   border-color: #292929;
   color: #292929;
 }
@@ -63,14 +66,15 @@
   }
 
   .nav-links button {
-    border: 1px solid white;
+    border: 1px solid #aa3141b2;
+    border-radius: 5px;
+    background-color: rgba(247, 163, 142, 0.596);
     color: white;
-    background: transparent;
   }
   
   .nav-links button:hover,
   .nav-links button:active {
-    background: #f8df00;
+    background: #aa3141b2;
     color: #292929;
   }
 }
